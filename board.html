@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Books | LearnixGPT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f9ff;
+    }
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #004080;
+      color: white;
+      padding-top: 20px;
+      overflow-y: auto;
+    }
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .sidebar .logo img {
+      width: 100px;
+    }
+    .sidebar .logo h4 {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .sidebar li:hover, .sidebar li.active {
+      background: #0066cc;
+    }
+    .content {
+      margin-left: 240px;
+      padding: 40px;
+    }
+    .board-section {
+      margin-bottom: 60px;
+    }
+    .class-section {
+      margin-bottom: 30px;
+    }
+    .class-section h5 {
+      margin-bottom: 20px;
+      color: #004080;
+      font-weight: bold;
+    }
+    .subject-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      overflow-x: auto;
+    }
+    .subject-box {
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      padding: 25px;
+      width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .subject-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+    .subject-box h6 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #003366;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    .subject-box a {
+      background: #003366;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+      text-decoration: none;
+    }
+    .subject-box a:hover {
+      background: #002244;
+    }
+    .back-profile-top {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00b894;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      text-decoration: none;
+    }
+    .back-profile-top:hover {
+      background: #00cec9;
+      transform: translateY(-2px);
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <a href="profile.html" class="back-profile-top">⬅ Back to Profile</a>
+
+  <div class="sidebar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <h4>LearnixGPT</h4>
+    </div>
+    <ul>
+      <li onclick="scrollToSection('cbse')">📚 CBSE</li>
+      <li onclick="scrollToSection('icse')">📖 ICSE</li>
+      <li onclick="scrollToSection('ssc')">📘 SSC</li>
+      <li onclick="scrollToSection('test')">📝 Tests</li>
+      <li onclick="scrollToSection('notes')">🗂️ Notes</li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h1>Books & Resources</h1>
+
+    <div class="board-section" id="cbse">
+      <h3>CBSE</h3>
+    </div>
+
+    <div class="board-section" id="icse">
+      <h3>ICSE</h3>
+    </div>
+
+    <div class="board-section" id="ssc">
+      <h3>SSC</h3>
+    </div>
+
+    <div class="board-section" id="test">
+      <h3>Tests</h3>
+    </div>
+
+    <div class="board-section" id="notes">
+      <h3>Notes</h3>
+    </div>
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    const booksData = {
+      1: ['English', 'Maths', 'EVS'],
+      2: ['English', 'Math', 'Science'],
+      3: ['Science', 'Social Studies', 'Math'],
+      4: ['EVS', 'Mathematics', 'GK'],
+      5: ['English Grammar', 'GK', 'Hindi'],
+      6: ['Physics', 'History', 'Math'],
+      7: ['Civics', 'Geography', 'Biology'],
+      8: ['Chemistry', 'Biology', 'Math'],
+      9: ['Algebra', 'World History', 'Geometry'],
+      10: ['English', 'Science', 'Computer']
+    };
+
+    const boards = ['cbse', 'icse', 'ssc', 'test', 'notes'];
+
+    boards.forEach(board => {
+      const boardContainer = document.getElementById(board);
+      for (let cls = 1; cls <= 10; cls++) {
+        const section = document.createElement("div");
+        section.className = "class-section";
+        section.innerHTML = `<h5>Class ${cls}</h5>`;
+
+        const row = document.createElement("div");
+        row.className = "subject-row";
+
+        booksData[cls].forEach(subject => {
+          const subjectBox = document.createElement("div");
+          subjectBox.className = "subject-box";
+          subjectBox.innerHTML = `
+            <h6>${subject}</h6>
+            <a href="/pdfs/${board}/class${cls}_${subject.toLowerCase().replace(/ /g, '_')}.pdf" target="_blank">Open</a>
+          `;
+          row.appendChild(subjectBox);
+        });
+
+        section.appendChild(row);
+        boardContainer.appendChild(section);
+      }
+    });
+  </script>
+</body>
+</html>
